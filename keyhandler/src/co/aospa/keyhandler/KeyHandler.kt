@@ -26,14 +26,17 @@ class KeyHandler(
     private val context: Context
 ) : DeviceKeyHandler {
 
-    private val fpDoubleTapHandler = FpDoubleTapHandler(context)
+    private val hasSideFps = context.resources.getBoolean(
+            com.android.internal.R.bool.config_is_powerbutton_fps)
+    private val fpDoubleTapHandler = if (hasSideFps) FpDoubleTapHandler(context) else null
 
     override fun handleKeyEvent(event: KeyEvent): KeyEvent? {
         return when (event.scanCode) {
             KEYCODE_FP_DOUBLE_TAP_FPC,
             KEYCODE_FP_DOUBLE_TAP_GOODIX -> {
-                dlog("fp double tap event: $event")
-                fpDoubleTapHandler.handleEvent(event)
+                fpDoubleTapHandler?.handleEvent(event).also {
+                    dlog("handled fp double tap event: $event")
+                }
                 null
             }
             else -> event
