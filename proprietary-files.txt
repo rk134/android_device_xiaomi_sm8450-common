@@ -406,21 +406,21 @@ vendor/lib64/libdolbyvision.so
 vendor/lib64/vendor.dolby.hardware.dms@2.0-impl.so
 vendor/lib64/vendor.dolby.hardware.dms@2.0.so
 
-# Media (Dolby Audio) - from nuwa MIUI V14.0.2.0.UMBMIXM
-vendor/bin/hw/vendor.dolby.media.c2@1.0-service|f4bcd0776be21da47cd1e0cccf838d841d1c7914
+# Media (Dolby Audio) - from nuwa HyperOS 1.0.6.0.UMBMIXM
+vendor/bin/hw/vendor.dolby.media.c2@1.0-service|4a88666d7f072ce6ba4147198fe3aee1eebf1481|f4bcd0776be21da47cd1e0cccf838d841d1c7914
 vendor/etc/init/vendor.dolby.media.c2@1.0-service.rc|bc1e134139c7dd0e5b4f98952aa51c629ea66dc7
-vendor/lib64/libcodec2_soft_ac4dec.so|d05ca5722350cb3654098096bd39f478396a627e
-vendor/lib64/libcodec2_soft_ddpdec.so|85beb82e2dd6d020a18e628bf15a174e03eddf8c
+vendor/lib64/libcodec2_soft_ac4dec.so|bc4d4a81c88d58b86d79f28405998a59e863493f
+vendor/lib64/libcodec2_soft_ddpdec.so|18dde1c96a1e82b9c47c4b38e756a98d24f501ac
 vendor/lib64/libcodec2_store_dolby.so|3749d05dc119cd7c06d536cafbe7a79101386bec
-vendor/lib64/libdapparamstorage.so|6687bb0673a0c681bc6bdc0df7c876cc01600d5c
-vendor/lib64/libdeccfg.so|0106d4d3069f413ab90a2d6dce9fd215ea565e25
-vendor/lib64/libdlbpreg.so|49d9fe0ff22a8a7feaca5d5996e19a112517533e
-vendor/lib64/libspatializerparamstorage.so|3eea1870e6b3c8d4799d3b9e13c0d3d13dba3e00
+vendor/lib64/libdapparamstorage.so|36998deb47a165f5aabd756443b70f29288c66ef
+vendor/lib64/libdeccfg.so|39132d7f1422121cf808ed369beda4d1e99ac399
+vendor/lib64/libdlbpreg.so|42657310ed4b6fe69ba3805005d5a022dac86b91
+vendor/lib64/libspatializerparamstorage.so|12acd14beacfa2e22015e4a9b21dd6cb8c026d4d
 vendor/lib64/soundfx/libdlbvol.so|8ef979e2d0768fd1f1cc1b88b2c6c5e03d57600c
-vendor/lib64/soundfx/libhwdap.so|9d9d434864d5d5445e9def4871dd11d4d262186e
-vendor/lib64/soundfx/libswgamedap.so|c1111602ed9ac7db970956645e9d2b8c2c21b0b1
-vendor/lib64/soundfx/libswspatializer.so|4a62bf548fc8a56f2704920dfbcd634cc88f7afa
-vendor/lib64/soundfx/libswvqe.so|b057f8a65f94d3009e77cd4c6cebf5a9554c43e0
+vendor/lib64/soundfx/libhwdap.so|521a1c7ea72fcbb18106d1447ed9248435fc822a
+vendor/lib64/soundfx/libswgamedap.so|1cf88b807b57bc1e83976717d540e9ff9e9db13c
+vendor/lib64/soundfx/libswspatializer.so|4156088e5c7cd76bfae9b37454d6918ec80d4b8d
+vendor/lib64/soundfx/libswvqe.so|1a8acf7b2601275a584bb2302e74b40826f4876f
 
 # Memory
 vendor/lib64/libvmmem.so
