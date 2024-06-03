@@ -79,6 +79,8 @@ PRODUCT_VENDOR_PROPERTIES += \
     ro.vendor.audio.support.sound.id=true
 
 # Bluetooth
+TARGET_USE_AIDL_QTI_BT_AUDIO := true
+
 PRODUCT_VENDOR_PROPERTIES += \
     persist.sys.fflag.override.settings_bluetooth_hearing_aid=true \
     persist.vendor.qcom.bluetooth.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac-ldac-aptxadaptiver2 \
