@@ -27,7 +27,7 @@
         android:key="fp_double_tap_action"
         android:entries="@array/fp_double_tap_action_entries"
         android:entryValues="@array/fp_double_tap_action_values"
-        android:defaultValue="0"
+        android:defaultValue="1"
         android:title="@string/fp_double_tap_action"
         android:summary="%s" />
 

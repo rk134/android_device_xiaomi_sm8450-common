@@ -66,7 +66,7 @@ class FpDoubleTapHandler(
     private val fpDoubleTapAction: Int
         get() =
             Settings.System.getIntForUser(context.contentResolver, SETTING_KEY_ACTION,
-                0, UserHandle.USER_CURRENT)
+                1, UserHandle.USER_CURRENT)
 
     private var torchOn = false
     private var screenOn = true
