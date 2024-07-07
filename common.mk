@@ -297,6 +297,7 @@ PRODUCT_PACKAGES += \
     libavservices_minijail_vendor \
     libcodec2_hidl@1.2.vendor \
     libcodec2_soft_common.vendor \
+    libcodec2_hidl_shim.vendor \
     libsfplugin_ccodec_utils.vendor
 
 PRODUCT_VENDOR_PROPERTIES += \
