@@ -57,7 +57,7 @@ on post-fs-data
     mkdir /data/vendor/qrtr 0775 system system
 
 on property:ro.boot.hwversion=*
-    setprop ro.boot.hardware.revision ${ro.boot.hwversion}
+    setprop ro.boot.hardware.revision ${ro.boot.hwc}_${ro.boot.hwlevel}_${ro.boot.hwversion}
 
 service init-xiaomi-taro-sh /vendor/bin/init.xiaomi_taro.sh
     class main
