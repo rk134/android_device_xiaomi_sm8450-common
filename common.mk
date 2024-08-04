@@ -407,6 +407,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_ODM_PROPERTIES += \
     vendor.usb.use_gadget_hal=0
 
+PRODUCT_PACKAGES += \
+    libusbhost.vendor
+
 ifneq ($(TARGET_BUILD_VARIANT),user)
 PRODUCT_VENDOR_PROPERTIES += \
     persist.vendor.usb.config=mtp,adb
