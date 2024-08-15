@@ -19,8 +19,6 @@ on boot
     # Touchscreen
     chown system system /dev/xiaomi-touch
     chmod 0660 /dev/xiaomi-touch
-    chown system system /sys/devices/platform/goodix_ts.0/goodix_ts_report_rate
-    chmod 0660 /sys/devices/platform/goodix_ts.0/goodix_ts_report_rate
     chown system system /sys/class/touch/touch_dev/palm_sensor
     chmod 0664 /sys/class/touch/touch_dev/palm_sensor
 
