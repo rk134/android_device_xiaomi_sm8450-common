@@ -11,6 +11,7 @@
 
 #define SET_CUR_VALUE 0
 #define TOUCH_DOUBLETAP_MODE 14
+#define TOUCH_SINGLETAP_MODE 21
 #define TOUCH_MAGIC 't'
 #define TOUCH_IOC_SETMODE _IO(TOUCH_MAGIC, SET_CUR_VALUE)
 #define TOUCH_DEV_PATH "/dev/xiaomi-touch"
@@ -26,6 +27,13 @@ bool setDeviceSpecificFeature(Feature feature, bool enabled) {
         case Feature::DOUBLE_TAP: {
             int fd = open(TOUCH_DEV_PATH, O_RDWR);
             int arg[3] = {TOUCH_ID, TOUCH_DOUBLETAP_MODE, enabled ? 1 : 0};
+            ioctl(fd, TOUCH_IOC_SETMODE, &arg);
+            close(fd);
+            return true;
+        }
+        case Feature::SINGLE_TAP: {
+            int fd = open(TOUCH_DEV_PATH, O_RDWR);
+            int arg[3] = {TOUCH_ID, TOUCH_SINGLETAP_MODE, enabled ? 1 : 0};
             ioctl(fd, TOUCH_IOC_SETMODE, &arg);
             close(fd);
             return true;
