@@ -97,6 +97,11 @@
             android:permission="TouchOrientationService">
         </service>
 
+        <service
+            android:name=".touch.TouchNonUiService"
+            android:permission="TouchNonUiService">
+        </service>
+
     </application>
 </manifest>
 
