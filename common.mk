@@ -177,6 +177,10 @@ PRODUCT_VENDOR_PROPERTIES += \
     persist.vendor.dpm.vndr.halservice.enable=1 \
     persist.vendor.dpm.vndr.idletimer.mode=default
 
+# DPM
+PRODUCT_PACKAGES += \
+    libhidlbase_shim
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.4.vendor \
