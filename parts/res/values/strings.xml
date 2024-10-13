@@ -52,5 +52,6 @@
      <string name="perf_mode_title">High performance mode</string>
      <string name="perf_mode_summary">Increase system performance at the cost of higher battery usage and temperatures</string>
      <string name="perf_mode_error">Error occured!</string>
+     <string name="perf_mode_notification">High performance mode is currently active</string>
 
 </resources>

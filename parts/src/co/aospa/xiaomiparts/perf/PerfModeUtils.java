@@ -6,7 +6,12 @@
 
 package co.aospa.xiaomiparts.perf;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.os.Process;
@@ -14,6 +19,7 @@ import android.os.ServiceManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import co.aospa.xiaomiparts.R;
 import co.aospa.xiaomiparts.thermal.ThermalUtils;
 import com.qualcomm.qti.IPerfManager;
 
@@ -23,9 +29,14 @@ public class PerfModeUtils {
     public static final String PREF_KEY = "performance_mode";
     private static final String PERF_SERVICE_BINDER_NAME = "vendor.perfservice";
     private static final int PERFORMANCE_MODE_BOOST_ID = 0x00001091;
+    private static final int NOTIFICATION_ID = 0;
+
     private static PerfModeUtils sInstance;
     private final Context mContext;
     private final SharedPreferences mSharedPrefs;
+    private final NotificationManager mNotificationManager;
+    private Notification mNotification;
+
     private final IPerfManager mPerfManager;
     private int mPerfHandle = -1;
 
@@ -39,6 +50,7 @@ public class PerfModeUtils {
     private PerfModeUtils(Context context) {
         mContext = context;
         mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+
         IBinder perfBinder = ServiceManager.getService(PERF_SERVICE_BINDER_NAME);
         if (perfBinder != null) {
             mPerfManager = IPerfManager.Stub.asInterface(perfBinder);
@@ -46,7 +58,34 @@ public class PerfModeUtils {
             Log.e(TAG, "Failed to get perf service!");
             mPerfManager = null;
         }
+
+        mNotificationManager = (NotificationManager)
+                context.getSystemService(Context.NOTIFICATION_SERVICE);
+        setupNotification();
     }
+
+    private void setupNotification() {
+        final Intent intent = new Intent(Intent.ACTION_POWER_USAGE_SUMMARY)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(
+                mContext, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        final NotificationChannel channel = new NotificationChannel(TAG /* channel id */,
+                mContext.getText(R.string.perf_mode_title),
+                NotificationManager.IMPORTANCE_DEFAULT);
+        channel.setBlockable(true);
+        mNotificationManager.createNotificationChannel(channel);
+
+        mNotification = new Notification.Builder(mContext, TAG /* channel id */)
+                .setContentTitle(mContext.getText(R.string.perf_mode_title))
+                .setContentText(mContext.getText(R.string.perf_mode_notification))
+                .setSmallIcon(R.drawable.speed_24px)
+                .setContentIntent(pendingIntent)
+                .setOngoing(true)
+                .setFlag(Notification.FLAG_NO_CLEAR, true)
+                .build();
+    }
+
 
     public void onBootCompleted() {
         if (isPerformanceModeOn()) {
@@ -79,6 +118,7 @@ public class PerfModeUtils {
             ThermalUtils tu = ThermalUtils.getInstance(mContext);
             tu.stopService();
             tu.setBenchmarkThermalProfile();
+            mNotificationManager.notify(NOTIFICATION_ID, mNotification);
         } catch (Exception e) {
             Log.e(TAG, "Failed to call perfHint!");
             return false;
@@ -109,6 +149,7 @@ public class PerfModeUtils {
             ThermalUtils tu = ThermalUtils.getInstance(mContext);
             tu.setDefaultThermalProfile();
             tu.startService();
+            mNotificationManager.cancel(NOTIFICATION_ID);
         } else {
             Log.e(TAG, "turnOffPerformanceMode: turn off failure");
             return false;
