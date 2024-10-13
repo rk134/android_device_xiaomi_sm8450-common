@@ -28,6 +28,7 @@
     <string name="thermal_navigation">Navigation</string>
     <string name="thermal_streaming">Streaming</string>
     <string name="thermal_video">Video</string>
+    <string name="thermal_perf_mode_enabled">Thermal profiles cannot be used when performance mode is active.</string>
 
      <!-- Gestures: double tap on fingerprint sensor -->
      <string name="fp_double_tap_title">Double tap on fingerprint sensor</string>
@@ -46,5 +47,10 @@
      <string name="action_vibrate">Switch ringer mode (vibrate)</string>
      <string name="action_volume">Show volume panel</string>
      <string name="action_sleep">Turn off screen</string>
+
+     <!-- Performance mode -->
+     <string name="perf_mode_title">High performance mode</string>
+     <string name="perf_mode_summary">Increase system performance at the cost of higher battery usage and temperatures</string>
+     <string name="perf_mode_error">Error occured!</string>
 
 </resources>

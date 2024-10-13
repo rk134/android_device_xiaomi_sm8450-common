@@ -37,6 +37,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -45,6 +46,7 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.widget.MainSwitchPreference;
 
 import co.aospa.xiaomiparts.R;
+import co.aospa.xiaomiparts.perf.PerfModeUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,6 +58,7 @@ public class ThermalSettingsFragment extends PreferenceFragment
         implements ApplicationsState.Callbacks {
 
     private static final String THERMAL_ENABLE_KEY = "thermal_enable";
+    private static final String THERMAL_PERF_MODE_FOOTER = "thermal_perf_mode_footer";
 
     private AllPackagesAdapter mAllPackagesAdapter;
     private ApplicationsState mApplicationsState;
@@ -67,6 +70,7 @@ public class ThermalSettingsFragment extends PreferenceFragment
     private ThermalUtils mThermalUtils;
     private RecyclerView mAppsRecyclerView;
     private MainSwitchPreference mMainSwitch;
+    private Preference mPerfModeFooter;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -76,9 +80,10 @@ public class ThermalSettingsFragment extends PreferenceFragment
         mMainSwitch = (MainSwitchPreference) findPreference(THERMAL_ENABLE_KEY);
         mMainSwitch.addOnSwitchChangeListener((switchView, isChecked) -> {
             mThermalUtils.setEnabled(isChecked);
-            mAppsRecyclerView.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+            updateVisibility();
         });
         mMainSwitch.setChecked(mThermalUtils.isEnabled());
+        mPerfModeFooter = findPreference(THERMAL_PERF_MODE_FOOTER);
     }
 
     @Override
@@ -99,7 +104,15 @@ public class ThermalSettingsFragment extends PreferenceFragment
         mAppsRecyclerView = view.findViewById(R.id.thermal_rv_view);
         mAppsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAppsRecyclerView.setAdapter(mAllPackagesAdapter);
-        mAppsRecyclerView.setVisibility(mThermalUtils.isEnabled() ? View.VISIBLE : View.GONE);
+        updateVisibility();
+    }
+
+    private void updateVisibility() {
+        boolean perfModeOn = PerfModeUtils.getInstance(getActivity()).isPerformanceModeOn();
+        boolean enabled = mThermalUtils.isEnabled() && !perfModeOn;
+        mPerfModeFooter.setVisible(perfModeOn);
+        mMainSwitch.setEnabled(enabled);
+        mAppsRecyclerView.setVisibility(enabled ? View.VISIBLE : View.GONE);
     }
 
     @Override

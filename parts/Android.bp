@@ -8,14 +8,19 @@
 android_app {
     name: "XiaomiParts",
 
-    srcs: ["src/**/*.java"],
+    srcs: [
+        "src/**/*.java",
+        "src/**/*.aidl",
+    ],
     resource_dirs: ["res"],
     certificate: "platform",
     platform_apis: true,
     system_ext_specific: true,
     privileged: true,
 
-    overrides: ["MusicFX"],
+    overrides: [
+        "PerformanceMode",
+    ],
     static_libs: [
         "co.aospa.resources",
         "vendor.xiaomi.hardware.displayfeature-V1.0-java",

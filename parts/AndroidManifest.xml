@@ -54,12 +54,17 @@
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.gestures" />
             <meta-data android:name="com.android.settings.summary_uri"
-                       android:value="content://co.aospa.xiaomiparts.device.summary/fp_double_tap" />
+                       android:value="content://co.aospa.xiaomiparts.settings" />
+            <meta-data android:name="com.android.settings.keyhint"
+                       android:value="fp_double_tap" />
         </activity>
 
         <provider
-            android:name=".SummaryProvider"
-            android:authorities="co.aospa.xiaomiparts.device.summary">
+            android:name=".SettingsProvider"
+            android:authorities="co.aospa.xiaomiparts.settings">
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+            </intent-filter>
         </provider>
 
         <service

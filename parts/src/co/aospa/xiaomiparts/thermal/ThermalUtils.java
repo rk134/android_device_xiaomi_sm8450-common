@@ -116,9 +116,9 @@ public final class ThermalUtils {
         }
     }
 
-    private void stopService() {
+    public void stopService() {
         dlog("stopService");
-        mContext.stopService(mServiceIntent);
+        mContext.stopServiceAsUser(mServiceIntent, UserHandle.CURRENT);
     }
 
     protected Boolean isEnabled() {
@@ -227,8 +227,12 @@ public final class ThermalUtils {
         return state;
     }
 
-    protected void setDefaultThermalProfile() {
+    public void setDefaultThermalProfile() {
         FileUtils.writeLine(THERMAL_SCONFIG, THERMAL_STATE_MAP.get(STATE_DEFAULT));
+    }
+
+    public void setBenchmarkThermalProfile() {
+        FileUtils.writeLine(THERMAL_SCONFIG, THERMAL_STATE_MAP.get(STATE_BENCHMARK));
     }
 
     protected void setThermalProfile(String packageName) {
