@@ -16,6 +16,7 @@ import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.os.Process;
 import android.os.ServiceManager;
+import android.os.SystemProperties;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -27,6 +28,7 @@ public class PerfModeUtils {
 
     private static final String TAG = "PerfModeUtils";
     public static final String PREF_KEY = "performance_mode";
+    private static final String SYS_PROP = "sys.perf_mode_active";
     private static final String PERF_SERVICE_BINDER_NAME = "vendor.perfservice";
     private static final int PERFORMANCE_MODE_BOOST_ID = 0x00001091;
     private static final int NOTIFICATION_ID = 0;
@@ -119,6 +121,7 @@ public class PerfModeUtils {
             tu.stopService();
             tu.setBenchmarkThermalProfile();
             mNotificationManager.notify(NOTIFICATION_ID, mNotification);
+            SystemProperties.set(SYS_PROP, "1");
         } catch (Exception e) {
             Log.e(TAG, "Failed to call perfHint!");
             return false;
@@ -150,6 +153,7 @@ public class PerfModeUtils {
             tu.setDefaultThermalProfile();
             tu.startService();
             mNotificationManager.cancel(NOTIFICATION_ID);
+            SystemProperties.set(SYS_PROP, "0");
         } else {
             Log.e(TAG, "turnOffPerformanceMode: turn off failure");
             return false;

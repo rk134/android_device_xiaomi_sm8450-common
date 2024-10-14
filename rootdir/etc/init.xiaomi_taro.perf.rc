@@ -10,3 +10,9 @@ on property:vendor.post_boot.parsed=1
     write /proc/sys/walt/input_boost/input_boost_freq "1324800 0 0 0 1113600 0 0 0"
     write /proc/sys/walt/input_boost/powerkey_input_boost_freq "1785600 0 0 0 2169600 0 0 2419200"
     write /proc/sys/walt/input_boost/powerkey_input_boost_ms 500
+
+on property:sys.perf_mode_active=1
+    write /sys/devices/system/cpu/qcom_lpm/parameters/sleep_disabled 1
+
+on property:sys.perf_mode_active=0
+    write /sys/devices/system/cpu/qcom_lpm/parameters/sleep_disabled 0

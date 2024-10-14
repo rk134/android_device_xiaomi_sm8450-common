@@ -2,3 +2,5 @@ ro.boot.hwc                    u:object_r:exported_default_prop:s0
 ro.boot.hwversion              u:object_r:exported_default_prop:s0
 ro.product.marketname          u:object_r:build_prop:s0
 ro.product.mod_device          u:object_r:build_prop:s0
+
+sys.perf_mode_active           u:object_r:exported3_system_prop:s0
