@@ -26,7 +26,6 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Display.HdrCapabilities;
 
-import co.aospa.xiaomiparts.camera.NfcCameraService;
 import co.aospa.xiaomiparts.display.ColorService;
 import co.aospa.xiaomiparts.display.DcDimmingService;
 import co.aospa.xiaomiparts.doze.AodBrightnessService;
@@ -34,7 +33,6 @@ import co.aospa.xiaomiparts.doze.PocketService;
 import co.aospa.xiaomiparts.gestures.GestureUtils;
 import co.aospa.xiaomiparts.perf.PerfModeUtils;
 import co.aospa.xiaomiparts.thermal.ThermalUtils;
-import co.aospa.xiaomiparts.touch.TouchNonUiService;
 import co.aospa.xiaomiparts.touch.TouchOrientationService;
 
 public class BootCompletedReceiver extends BroadcastReceiver {
@@ -53,9 +51,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         DcDimmingService.startService(context);
         AodBrightnessService.startService(context);
         PocketService.startService(context);
-        NfcCameraService.startService(context);
         TouchOrientationService.startService(context);
-        TouchNonUiService.startService(context);
         ThermalUtils.getInstance(context).startService();
         GestureUtils.onBootCompleted(context);
         PerfModeUtils.getInstance(context).onBootCompleted();
