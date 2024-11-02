@@ -45,6 +45,9 @@ $(foreach DEVICE_SKU, $(QCV_FAMILY_SKUS), \
     $(LOCAL_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_$(DEVICE_SKU)/audio_effects.xml \
     $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_$(DEVICE_SKU)_qssi/audio_policy_configuration.xml)
 
+PRODUCT_PACKAGES += \
+    libaudioroute.vendor
+
 PRODUCT_ODM_PROPERTIES += \
     aaudio.mmap_policy=1 \
     vendor.audio.offload.buffer.size.kb=256
@@ -95,6 +98,9 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.7.vendor \
     vendor.qti.hardware.camera.aon@1.0.vendor \
     liblz4.vendor \
+    libgui_vendor \
+    libcamera_metadata.vendor \
+    libutils.vendor \
     vendor.qti.hardware.camera.postproc@1.0.vendor
 
 PRODUCT_COPY_FILES += \
@@ -362,6 +368,11 @@ TARGET_COMMON_QTI_COMPONENTS := \
     usb \
     wfd \
     wlan
+
+# QMI
+PRODUCT_PACKAGES += \
+    libjsoncpp.vendor
+    libsqlite.vendor \
 
 # Radio
 PRODUCT_VENDOR_PROPERTIES += \
